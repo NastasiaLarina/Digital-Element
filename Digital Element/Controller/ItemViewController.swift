@@ -9,16 +9,49 @@ import UIKit
 
 class ItemViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        activityIndicator.stopAnimating()
+        
+        getItemWithURLSession()
+        
         let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .vertical //.horizontal
             layout.minimumLineSpacing = 5
             layout.minimumInteritemSpacing = 5
             collectionView.setCollectionViewLayout(layout, animated: true)
+    }
+    
+    
+    func getItemWithURLSession() {
+        guard let url = URL(string: "https://d-element.ru/test_api.php")
+        else { return }
+        
+        let session = URLSession.shared
+        
+            // show indicator
+        activityIndicator.startAnimating()
+        
+        let task = session.dataTask(with: url) { (data, response, error) in
+   
+            // delete indicator
+            // ставим в главный поток блок
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
+            
+            if let data = data {
+                let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
+            }
+        }
+        
+        task.resume()
     }
     
     // MARK: - Collection View
