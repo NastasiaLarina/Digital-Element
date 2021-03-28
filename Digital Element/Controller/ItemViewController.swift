@@ -6,19 +6,30 @@
 //
 
 import UIKit
+import Alamofire
 
 class ItemViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var name: String?
+    lazy var service = ItemAPIService()
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        activityIndicator.stopAnimating()
+        title = name
+        service.getItem(name: name ?? "")
         
-        getItemWithURLSession()
+       // activityIndicator.stopAnimating()
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            self.getItemWithURLSessionComponents()
+//        }
+//        getItemWithURLSessionComponents()
+        
+        getItemWithAlamofire()
+        
         
         let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .vertical //.horizontal
@@ -33,14 +44,10 @@ class ItemViewController: UICollectionViewController, UICollectionViewDelegateFl
         else { return }
         
         let session = URLSession.shared
-        
-            // show indicator
-        activityIndicator.startAnimating()
-        
         let task = session.dataTask(with: url) { (data, response, error) in
    
             // delete indicator
-            // ставим в главный поток блок
+            // ставим в главный поток блок закгрузку
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
             }
@@ -54,8 +61,44 @@ class ItemViewController: UICollectionViewController, UICollectionViewDelegateFl
         task.resume()
     }
     
-    // MARK: - Collection View
+    func getItemWithURLSessionComponents() {
+        var componets = URLComponents()
+        componets.scheme = "https"
+        componets.host = "d-element.ru"
+        componets.path = "/test_api.php"
+        componets.queryItems = [
+            URLQueryItem(name: "", value: ""),
+            URLQueryItem(name: "", value: ""),
+        ]
+        
+        guard let url = componets.url else { return }
+       
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { (data, response, error) in
+        // delete indicator, ставим в главный поток блок закгрузку
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
+            
+            if let data = data {
+                let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
+            }
+        }
+        
+        task.resume()
+    }
     
+    func getItemWithAlamofire() {
+        let urlPath = "https://d-element.ru/test_api.php"
+        AF.request(urlPath).responseJSON { (response) in
+            print(response.value)
+            
+        }
+    }
+    
+    
+    // MARK: - Collection View
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 8

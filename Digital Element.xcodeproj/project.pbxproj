@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B41E58C21FF07D95F7D6B31 /* Pods_Digital_Element.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82DC5ADF30E93AB68562D511 /* Pods_Digital_Element.framework */; };
 		2E2C13A0260C642D00DDACC0 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2C139F260C642D00DDACC0 /* ItemViewController.swift */; };
 		2E2C13A4260C888200DDACC0 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2C13A3260C888200DDACC0 /* ItemCell.swift */; };
+		2E2C13B6260F93ED00DDACC0 /* ItemAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2C13B5260F93ED00DDACC0 /* ItemAPIService.swift */; };
 		2E82BD72260B522A0061A019 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82BD71260B522A0061A019 /* AppDelegate.swift */; };
 		2E82BD74260B522A0061A019 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82BD73260B522A0061A019 /* SceneDelegate.swift */; };
 		2E82BD79260B522A0061A019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E82BD77260B522A0061A019 /* Main.storyboard */; };
@@ -19,6 +21,7 @@
 /* Begin PBXFileReference section */
 		2E2C139F260C642D00DDACC0 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		2E2C13A3260C888200DDACC0 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		2E2C13B5260F93ED00DDACC0 /* ItemAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAPIService.swift; sourceTree = "<group>"; };
 		2E82BD6E260B522A0061A019 /* Digital Element.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Element.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E82BD71260B522A0061A019 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E82BD73260B522A0061A019 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,9 @@
 		2E82BD7A260B522F0061A019 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E82BD7D260B522F0061A019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E82BD7F260B522F0061A019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		370590AB482353E5EA476626 /* Pods-Digital Element.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Digital Element.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Digital Element/Pods-Digital Element.debug.xcconfig"; sourceTree = "<group>"; };
+		82DC5ADF30E93AB68562D511 /* Pods_Digital_Element.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Digital_Element.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F62307525C05DFF752FCAE34 /* Pods-Digital Element.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Digital Element.release.xcconfig"; path = "Pods/Target Support Files/Pods-Digital Element/Pods-Digital Element.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B41E58C21FF07D95F7D6B31 /* Pods_Digital_Element.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,11 +54,29 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		2E2C13B0260F936000DDACC0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2E2C13C32610B03C00DDACC0 /* Helpers */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2E2C13C32610B03C00DDACC0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2E2C13B5260F93ED00DDACC0 /* ItemAPIService.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		2E82BD65260B522A0061A019 = {
 			isa = PBXGroup;
 			children = (
 				2E82BD70260B522A0061A019 /* Digital Element */,
 				2E82BD6F260B522A0061A019 /* Products */,
+				86374B05628D53FF54EB0478 /* Pods */,
+				CBBA12A88C9C35CA9F5BC757 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				2E82BD7F260B522F0061A019 /* Info.plist */,
+				2E2C13B0260F936000DDACC0 /* Services */,
 				2E82BD8F260B98520061A019 /* App */,
 				2E82BD86260B52410061A019 /* Model */,
 				2E82BD87260B524C0061A019 /* View */,
@@ -110,6 +136,23 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		86374B05628D53FF54EB0478 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				370590AB482353E5EA476626 /* Pods-Digital Element.debug.xcconfig */,
+				F62307525C05DFF752FCAE34 /* Pods-Digital Element.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CBBA12A88C9C35CA9F5BC757 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				82DC5ADF30E93AB68562D511 /* Pods_Digital_Element.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,9 +160,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E82BD82260B522F0061A019 /* Build configuration list for PBXNativeTarget "Digital Element" */;
 			buildPhases = (
+				8DE56253D72FF3227C5BBDAC /* [CP] Check Pods Manifest.lock */,
 				2E82BD6A260B522A0061A019 /* Sources */,
 				2E82BD6B260B522A0061A019 /* Frameworks */,
 				2E82BD6C260B522A0061A019 /* Resources */,
+				B036C3149CDC7C22374C6792 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,6 +220,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8DE56253D72FF3227C5BBDAC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Digital Element-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B036C3149CDC7C22374C6792 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Digital Element/Pods-Digital Element-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Digital Element/Pods-Digital Element-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2E82BD6A260B522A0061A019 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -183,6 +267,7 @@
 				2E82BD72260B522A0061A019 /* AppDelegate.swift in Sources */,
 				2E2C13A4260C888200DDACC0 /* ItemCell.swift in Sources */,
 				2E2C13A0260C642D00DDACC0 /* ItemViewController.swift in Sources */,
+				2E2C13B6260F93ED00DDACC0 /* ItemAPIService.swift in Sources */,
 				2E82BD74260B522A0061A019 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +412,7 @@
 		};
 		2E82BD83260B522F0061A019 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 370590AB482353E5EA476626 /* Pods-Digital Element.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -346,6 +432,7 @@
 		};
 		2E82BD84260B522F0061A019 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F62307525C05DFF752FCAE34 /* Pods-Digital Element.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
