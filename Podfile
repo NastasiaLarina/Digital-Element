@@ -6,5 +6,6 @@ target 'Digital Element' do
   use_frameworks!
 
   pod 'Alamofire', '~> 5.2'
-
+  pod 'SwiftyJSON', '~> 4.0'
+  
 end

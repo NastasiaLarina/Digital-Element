@@ -11,6 +11,7 @@
 		2E2C13A0260C642D00DDACC0 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2C139F260C642D00DDACC0 /* ItemViewController.swift */; };
 		2E2C13A4260C888200DDACC0 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2C13A3260C888200DDACC0 /* ItemCell.swift */; };
 		2E2C13B6260F93ED00DDACC0 /* ItemAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2C13B5260F93ED00DDACC0 /* ItemAPIService.swift */; };
+		2E2C13CE2611DDA900DDACC0 /* ItemsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2C13CD2611DDA900DDACC0 /* ItemsCodable.swift */; };
 		2E82BD72260B522A0061A019 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82BD71260B522A0061A019 /* AppDelegate.swift */; };
 		2E82BD74260B522A0061A019 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82BD73260B522A0061A019 /* SceneDelegate.swift */; };
 		2E82BD79260B522A0061A019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E82BD77260B522A0061A019 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		2E2C139F260C642D00DDACC0 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		2E2C13A3260C888200DDACC0 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		2E2C13B5260F93ED00DDACC0 /* ItemAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAPIService.swift; sourceTree = "<group>"; };
+		2E2C13CD2611DDA900DDACC0 /* ItemsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCodable.swift; sourceTree = "<group>"; };
 		2E82BD6E260B522A0061A019 /* Digital Element.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Element.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E82BD71260B522A0061A019 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E82BD73260B522A0061A019 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		2E82BD86260B52410061A019 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2E2C13CD2611DDA900DDACC0 /* ItemsCodable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,10 +250,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Digital Element/Pods-Digital Element-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -264,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E2C13CE2611DDA900DDACC0 /* ItemsCodable.swift in Sources */,
 				2E82BD72260B522A0061A019 /* AppDelegate.swift in Sources */,
 				2E2C13A4260C888200DDACC0 /* ItemCell.swift in Sources */,
 				2E2C13A0260C642D00DDACC0 /* ItemViewController.swift in Sources */,

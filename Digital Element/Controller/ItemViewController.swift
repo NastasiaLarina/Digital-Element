@@ -6,112 +6,83 @@
 //
 
 import UIKit
-import Alamofire
+
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.image = image
+            }
+        }.resume()
+    }
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
+}
 
 class ItemViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    var name: String?
-    lazy var service = ItemAPIService()
+    
+    var item = [Items]()
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = name
-        service.getItem(name: name ?? "")
         
-       // activityIndicator.stopAnimating()
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            self.getItemWithURLSessionComponents()
-//        }
-//        getItemWithURLSessionComponents()
-        
-        getItemWithAlamofire()
+        let url = URL(string: "https://d-element.ru/test_api.php")
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error == nil {
+                do {
+                self.item = try JSONDecoder().decode([Items].self, from: data!)
+                } catch {
+                    print("Parse Error")
+                }
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+                
+        }.resume()
         
         
         let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .vertical //.horizontal
+            layout.scrollDirection = .vertical 
             layout.minimumLineSpacing = 5
             layout.minimumInteritemSpacing = 5
             collectionView.setCollectionViewLayout(layout, animated: true)
-    }
     
-    
-    func getItemWithURLSession() {
-        guard let url = URL(string: "https://d-element.ru/test_api.php")
-        else { return }
-        
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { (data, response, error) in
-   
-            // delete indicator
-            // ставим в главный поток блок закгрузку
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-            }
-            
-            if let data = data {
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
-            }
-        }
-        
-        task.resume()
-    }
-    
-    func getItemWithURLSessionComponents() {
-        var componets = URLComponents()
-        componets.scheme = "https"
-        componets.host = "d-element.ru"
-        componets.path = "/test_api.php"
-        componets.queryItems = [
-            URLQueryItem(name: "", value: ""),
-            URLQueryItem(name: "", value: ""),
-        ]
-        
-        guard let url = componets.url else { return }
-       
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { (data, response, error) in
-        // delete indicator, ставим в главный поток блок закгрузку
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-            }
-            
-            if let data = data {
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
-            }
-        }
-        
-        task.resume()
-    }
-    
-    func getItemWithAlamofire() {
-        let urlPath = "https://d-element.ru/test_api.php"
-        AF.request(urlPath).responseJSON { (response) in
-            print(response.value)
-            
-        }
     }
     
     
     // MARK: - Collection View
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return item.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ItemCell
         
 
-        cell.articleItemLabel.text = "459827\(indexPath.row)"
-        cell.nameItemLabel.text = "Рубашка белая, из вискозы, 44"
-        cell.priceItemLamel.text = "75 руб."
+       // cell.articleItemLabel.text = item[indexPath.row].article?.self
+        cell.nameItemLabel.text = item[indexPath.row].name?.capitalized
+      //  cell.priceItemLamel.text = item[indexPath.row].price?.self
+       // cell.imageItemView.image = item[indexPath.row].image?.self
+        cell.imageItemView.contentMode = .scaleAspectFill
         cell.imageItemView.layer.cornerRadius = 10.0
+        guard let link = item[indexPath.row].image else { return <#default value#> }
+        cell.imageItemView.downloaded(from: link)
     
         return cell
     }
