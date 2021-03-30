@@ -13,7 +13,7 @@ class ItemCell: UICollectionViewCell {
     @IBOutlet weak var articleItemLabel: UILabel!
     @IBOutlet weak var nameItemLabel: UILabel!
     @IBOutlet weak var priceItemLamel: UILabel!
-
+    @IBOutlet weak var currencyLabel: UILabel!
 
 }
 

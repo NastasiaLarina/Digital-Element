@@ -52,12 +52,26 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fE5-7L-V4q">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xg5-zk-qtv">
                                                     <rect key="frame" x="0.0" y="61" width="168" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fE5-7L-V4q">
+                                                            <rect key="frame" x="0.0" y="0.0" width="81.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BNJ-jV-PtB">
+                                                            <rect key="frame" x="86.5" y="0.0" width="81.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="fE5-7L-V4q" firstAttribute="height" secondItem="BNJ-jV-PtB" secondAttribute="height" id="FDE-vj-vtb"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                         </stackView>
                                     </subviews>
@@ -74,6 +88,7 @@
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="articleItemLabel" destination="7g2-tN-eGW" id="bMM-Dc-RKN"/>
+                                    <outlet property="currencyLabel" destination="BNJ-jV-PtB" id="LbF-Tu-q8U"/>
                                     <outlet property="imageItemView" destination="Bhs-ng-Tm9" id="ums-xg-SZg"/>
                                     <outlet property="nameItemLabel" destination="8WT-qe-J8I" id="DBs-Bm-Ber"/>
                                     <outlet property="priceItemLamel" destination="fE5-7L-V4q" id="3yp-dJ-Nek"/>
