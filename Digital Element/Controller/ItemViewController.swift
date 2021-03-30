@@ -19,8 +19,9 @@ class ItemViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        activityIndicator.stopAnimating()
-        getItemWithURLSession()
+        DispatchQueue.main.asyncAfter (deadline: .now() + 3) {
+            self.getItemWithURLSession()
+        }
         
         let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .vertical 
@@ -36,12 +37,14 @@ class ItemViewController: UICollectionViewController, UICollectionViewDelegateFl
         let session = URLSession.shared
         activityIndicator.startAnimating()
         let task = session.dataTask(with: url) { (data, responce, error) in
-            DispatchQueue.main.asyncAfter (deadline: .now() + 3) {
+            DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
             }
-            print(data)
-            print(responce)
-            print(error)
+           
+            if let data = data {
+                let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
+            }
         }
         task.resume()
     }
