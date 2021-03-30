@@ -7,26 +7,6 @@
 
 import UIKit
 
-extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { [weak self] in
-                self?.image = image
-            }
-        }.resume()
-    }
-    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
-    }
-}
 
 class ItemViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
@@ -38,23 +18,9 @@ class ItemViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        let url = URL(string: "https://d-element.ru/test_api.php")
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error == nil {
-                do {
-                self.item = try JSONDecoder().decode([Items].self, from: data!)
-                } catch {
-                    print("Parse Error")
-                }
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
-                
-        }.resume()
-        
+       
+        activityIndicator.stopAnimating()
+        getItemWithURLSession()
         
         let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .vertical 
@@ -64,26 +30,38 @@ class ItemViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     }
     
+    func getItemWithURLSession() {
+       guard let url = URL(string: "https://d-element.ru/test_api.php")
+       else { return }
+        let session = URLSession.shared
+        activityIndicator.startAnimating()
+        let task = session.dataTask(with: url) { (data, responce, error) in
+            DispatchQueue.main.asyncAfter (deadline: .now() + 3) {
+                self.activityIndicator.stopAnimating()
+            }
+            print(data)
+            print(responce)
+            print(error)
+        }
+        task.resume()
+    }
+    
     
     // MARK: - Collection View
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return item.count
+        return 8
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ItemCell
         
 
-       // cell.articleItemLabel.text = item[indexPath.row].article?.self
-        cell.nameItemLabel.text = item[indexPath.row].name?.capitalized
-      //  cell.priceItemLamel.text = item[indexPath.row].price?.self
-       // cell.imageItemView.image = item[indexPath.row].image?.self
-        cell.imageItemView.contentMode = .scaleAspectFill
+       cell.articleItemLabel.text = "1345268"
+       cell.nameItemLabel.text = "Рубашка белая, из вискозы, 44"
+       cell.priceItemLamel.text = "75 руб."
         cell.imageItemView.layer.cornerRadius = 10.0
-        guard let link = item[indexPath.row].image else { return <#default value#> }
-        cell.imageItemView.downloaded(from: link)
-    
+        
         return cell
     }
     
