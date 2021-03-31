@@ -44,13 +44,24 @@ class ItemViewController: UICollectionViewController, UICollectionViewDelegateFl
                 self.activityIndicator.stopAnimating()
             }
             
-            if let data = data {
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
+            if let safeData = data {
+                self.parseJSON(itemData: safeData)
+//                let json = try? JSONSerialization.jsonObject(with: data, options: [])
+//                print(json)
             }
         }
         task.resume()
     }
+    
+    func parseJSON(itemData: Data) {
+        let decoder = JSONDecoder()
+        do {
+        let decodeData = try decoder.decode(Item.self, from: itemData)
+            print(decodeData.items[0].article)
+        } catch  {
+            print(error)
+        }
+        }
     
     
     func getItemWithAlamofire() {
